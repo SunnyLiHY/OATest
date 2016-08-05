@@ -16,8 +16,10 @@
       <button type="button" class="btn btn-info" id="user_add" data-toggle="modal" 
       data-target="#myModal" ng-click="showAddStuForm()">新增</button>
       <button type="button" class="btn btn-info" id="user_delete" ng-click="delStu()">删除</button>
-      <button type="button" class="btn btn-info" id="user_edit"  data-toggle="modal" 
-      data-target=""  ng-click="updateOneStu()">编辑</button>
+      <button type="button" class="btn btn-info popover-show" id="user_edit"  data-toggle="modal" 
+      data-target="UpdatemyModal"  ng-click="updateOneStu()" data-container="body" 
+      data-toggle="popover" 
+      data-content="请选择一条数据！">编辑</button>
 
     </div>
     <div class="btn-search">
@@ -42,7 +44,7 @@
         </tr>
       </thead>
       <tbody id="tbody">
-        <tr ng-repeat = "item in stu_list | orderBy:'item.id'">
+        <tr ng-repeat = "item in stu_list | orderBy:order">
           <td><div class=""><input type="checkbox" id="is_id" value="{{item.id}}" ng-click="isChecked(item,is_check)" ng-model="is_check"><label for="is_id"></label></div></td>
           <td ng-bind="item.id"></td>
           <td ng-bind="item.student_num"></td>

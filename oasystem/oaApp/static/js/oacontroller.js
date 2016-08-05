@@ -1,9 +1,11 @@
 angular.module("oasystem", [])
 	.controller('oacontroller', ['$scope', 'oaFactory', '$http', '$window','$filter', function($scope, oaFactory, $http, $window,$filter) {
+			$('.popover-show').popover('hide');
 			var promise = oaFactory.getFacStu();
 			promise.then(
 				function(data) {
 					$scope.stu_list = data;
+					$scope.order = "id";
 					// $scope.test=$scope.stu_list.length;
 					console.log($scope.stu_list[0].student_name);
 				},
@@ -17,10 +19,7 @@ angular.module("oasystem", [])
 			//增加一条学生信息
 			$scope.showAddStuForm = showAddStuForm;
 			$scope.addOneStu = addOneStu;
-
 			function addOneStu() {
-				// $scope.stu_list = oaFactory.addFacStu($scope.add_student_num,$scope.add_student_name,
-				// 	$scope.add_student_sex,$scope.add_student_psd);
 				var promise = oaFactory.addFacStu($scope.add_student_num, $scope.add_student_name,
 					$scope.add_student_sex, $scope.add_student_psd);
 				promise.then(
@@ -100,9 +99,10 @@ angular.module("oasystem", [])
 			function updateOneStu() {
 				showAddStuForm();
 				if (getAllCheckedId.length != 1) {
-					alert("请选择一条数据！");
+					$('.popover-show').popover('show');
 					$('#UpdatemyModal').modal('hide');
 				} else {
+					$('.popover-show').popover('hide');
 					$('#UpdatemyModal').modal('show');
 					$scope.update_student_num = $scope.stu_list[pos].student_num;
 					$scope.update_student_name = $scope.stu_list[pos].student_name;
