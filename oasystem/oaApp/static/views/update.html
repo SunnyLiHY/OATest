@@ -1,0 +1,43 @@
+<!-- 模态框（Modal） -->
+  <form class="form-horizontal" role="form" name="add_stu_form" ng-submit="updateForm()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">修改信息</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label  class="col-sm-2 control-label">学号</label>
+          <div class="col-sm-10">
+              <input class="form-control" placeholder="请输入学号" ng-model="update_student_num" name="content" require/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lastname" class="col-sm-2 control-label">姓名</label>
+          <div class="col-sm-10">
+            <input class="form-control" placeholder="请输入姓名" ng-model="update_student_name" name="content" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="firstname" class="col-sm-2 control-label">性别</label>
+          <div class="col-sm-10">  
+              <select name="type" class="form-control" ng-model="update_student_sex" required>
+                  <option value="0">男</option>
+                  <option value="1">女</option>
+              </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lastname" class="col-sm-2 control-label">密码</label>
+          <div class="col-sm-10">
+              <input class="form-control" type="password" placeholder="请输入密码" ng-model="update_student_psd" name="content" required/>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <a href="#list" type="button" class="btn btn-default">关闭</a>
+          <button type="button" class="btn btn-info" ng-click="updateStu()">确定</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div>
+  </form>

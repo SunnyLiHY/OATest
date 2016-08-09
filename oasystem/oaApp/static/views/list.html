@@ -1,0 +1,42 @@
+<div class="btn-list">
+  <a href="#list/add" type="button" class="btn btn-info" id="user_add" ng-click="showAddStuForm()">新增</a>
+  <button type="button" class="btn btn-info popover-delete" id="user_delete" ng-click="delStu()" data-container="body" 
+  data-toggle="popover"  data-placement="top" 
+  data-content="请选择数据！">删除</button>
+  <a href="" type="button" class="btn btn-info popover-show" id="user_edit"  ng-click="updateOneStu()" data-container="body" 
+  data-toggle="popover" 
+  data-content="请选择一条数据！">编辑</a>
+</div>
+<div class="btn-search">
+  <div class="col-md-3">
+    <input type="text" class="form-control" ng-model="student_num" placeholder="按学号查询">
+  </div>
+  <div class="col-md-3">
+    <input type="text" class="form-control" ng-model="student_name"placeholder="按姓名查询">
+  </div>
+  <button type="button" class="btn btn-info" ng-click="searchStu()">查询</button>
+</div>
+
+<table class="table" >
+  <thead>
+    <tr>
+      <th>选择</th>
+      <th>id</th>
+      <th>学号</th>
+      <th>姓名</th>
+      <th>性别</th>
+      <th>密码</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+    <tr ng-repeat = "item in stu_list | orderBy:order">
+      <td><div class=""><input type="checkbox" id="is_id" value="{{item.id}}" ng-click="isChecked(item,is_check)" ng-model="is_check"><label for="is_id"></label></div></td>
+      <td ng-bind="item.id"></td>
+      <td ng-bind="item.student_num"></td>
+      <td ng-bind="item.student_name"></td>
+      <td ng-bind="item.student_sex| sexFilter"></td>
+      <td ng-bind="item.student_psd"></td>
+    </tr>
+  </tbody>
+</table>
+
