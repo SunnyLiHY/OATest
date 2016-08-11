@@ -1,6 +1,9 @@
+/******************************** 路由
+**** admin :Sunny
+**** createon:2016/8/5
+********************************/
 var testapp = angular.module("oasystem", ['ngRoute']);
 testapp.config(['$routeProvider', function($routeProvider) {
-	console.log($routeProvider);
 	$routeProvider
 		.when('/list', {
 			// template : '<h1>{{test}}</h1>',

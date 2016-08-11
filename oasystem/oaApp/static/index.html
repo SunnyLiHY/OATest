@@ -9,175 +9,18 @@
     <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="screen">
 </head>
 
-<body  ng-controller="oacontroller">
-  <div class="container">
+<body>
+  <div class="panel container pt-page-moveToLeft">
     <center><h2 class="sub-title-text">OASYSTEM</h2></center>
-    <div class="btn-list">
-      <button type="button" class="btn btn-info" id="user_add" data-toggle="modal" 
-      data-target="#myModal" ng-click="showAddStuForm()">新增</button>
-      <button type="button" class="btn btn-info" id="user_delete" ng-click="delStu()">删除</button>
-      <button type="button" class="btn btn-info popover-show" id="user_edit"  data-toggle="modal" 
-      data-target="UpdatemyModal"  ng-click="updateOneStu()" data-container="body" 
-      data-toggle="popover" 
-      data-content="请选择一条数据！">编辑</button>
-
-    </div>
-    <div class="btn-search">
-      <div class="col-md-3">
-        <input type="text" class="form-control" ng-model="student_num" placeholder="按学号查询">
-      </div>
-      <div class="col-md-3">
-        <input type="text" class="form-control" ng-model="student_name"placeholder="按姓名查询">
-      </div>
-      <button type="button" class="btn btn-info" ng-click="searchStu()">查询</button>
-    </div>
-    
-    <table class="table" >
-      <thead>
-        <tr>
-          <th>选择</th>
-          <th>id</th>
-          <th>学号</th>
-          <th>姓名</th>
-          <th>性别</th>
-          <th>密码</th>
-        </tr>
-      </thead>
-      <tbody id="tbody">
-        <tr ng-repeat = "item in stu_list | orderBy:order">
-          <td><div class=""><input type="checkbox" id="is_id" value="{{item.id}}" ng-click="isChecked(item,is_check)" ng-model="is_check"><label for="is_id"></label></div></td>
-          <td ng-bind="item.id"></td>
-          <td ng-bind="item.student_num"></td>
-          <td ng-bind="item.student_name"></td>
-          <td ng-bind="item.student_sex"></td>
-          <td ng-bind="item.student_psd"></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="myModal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
-      <form class="form-horizontal" action="post"role="form" name="add_stu_form" ng-submit="addForm()">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
-              <h4 class="modal-title" id="myModalLabel">新增学生</h4>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label  class="col-sm-2 control-label">学号</label>
-                <div class="col-sm-10">
-                    <input class="form-control" placeholder="请输入学号" ng-model="add_student_num" name="content" require/>
-                    <!-- <span style="color:red" ng-show="add_stu_form.issubmit && add_stu_form.$invalid">
-                        <span ng-show="add_stu_form.content.$error.required">学号是必须的。</span>
-                    </span> -->
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="lastname" class="col-sm-2 control-label">姓名</label>
-                <div class="col-sm-10">
-                  <input class="form-control" placeholder="请输入姓名" ng-model="add_student_name" name="content" required/>
-                  <!-- <span style="color:red" ng-show="add_stu_form.issubmit && add_stu_form.$invalid">
-                      <span ng-show="add_stu_form.content.$error.required">姓名是必须的。</span>
-                  </span> -->
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="firstname" class="col-sm-2 control-label">性别</label>
-                <div class="col-sm-10">  
-                    <select name="type" class="form-control" ng-model="add_student_sex" required>
-                        <option value="男">男</option>
-                        <option value="女">女</option>
-                    </select>
-                   <!--  <span style="color:red" ng-show="add_stu_form.issubmit && add_stu_form.$invalid">
-                        <span ng-show="add_stu_form.type.$error.required">性别是必须的。</span>
-                    </span> -->
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="lastname" class="col-sm-2 control-label">密码</label>
-                <div class="col-sm-10">
-                    <input class="form-control" type="password" placeholder="请输入密码" ng-model="add_student_psd" name="content" required/>
-                    <!-- <span style="color:red" ng-show="add_stu_form.issubmit && add_stu_form.$invalid">
-                        <span ng-show="add_stu_form.content.$error.required">密码是必须的。</span>
-                    </span> -->
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="addOneStu()">确定</button>
-            </div>
-          </div><!-- /.modal-content -->
-        </div>
-      </form>
-    </div>
-    <!-- 模态框（Modal） -->
-    <div class="modal fade" id="UpdatemyModal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
-      <form class="form-horizontal" role="form" name="add_stu_form" ng-submit="updateForm()">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
-            <h4 class="modal-title" id="myModalLabel">修改信息</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label  class="col-sm-2 control-label">学号</label>
-              <div class="col-sm-10">
-                  <input class="form-control" placeholder="请输入学号" ng-model="update_student_num" name="content" require/>
-                  <!-- <span style="color:red" ng-show="add_stu_form.issubmit && add_stu_form.$invalid">
-                      <span ng-show="add_stu_form.content.$error.required">学号是必须的。</span>
-                  </span> -->
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="lastname" class="col-sm-2 control-label">姓名</label>
-              <div class="col-sm-10">
-                <input class="form-control" placeholder="请输入姓名" ng-model="update_student_name" name="content" required/>
-                <!-- <span style="color:red" ng-show="add_stu_form.issubmit && add_stu_form.$invalid">
-                    <span ng-show="add_stu_form.content.$error.required">姓名是必须的。</span>
-                </span> -->
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="firstname" class="col-sm-2 control-label">性别</label>
-              <div class="col-sm-10">  
-                  <select name="type" class="form-control" ng-model="update_student_sex" required>
-                      <option value="男">男</option>
-                      <option value="女">女</option>
-                  </select>
-                 <!--  <span style="color:red" ng-show="add_stu_form.issubmit && add_stu_form.$invalid">
-                      <span ng-show="add_stu_form.type.$error.required">性别是必须的。</span>
-                  </span> -->
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="lastname" class="col-sm-2 control-label">密码</label>
-              <div class="col-sm-10">
-                  <input class="form-control" type="password" placeholder="请输入密码" ng-model="update_student_psd" name="content" required/>
-                  <!-- <span style="color:red" ng-show="add_stu_form.issubmit && add_stu_form.$invalid">
-                      <span ng-show="add_stu_form.content.$error.required">密码是必须的。</span>
-                  </span> -->
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-              <button type="button" class="btn btn-info" data-dismiss="modal" ng-click="updateStu()">确定</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div>
-      </form>
-    </div>
+    <div ng-view id="wrapper"></div>
   </div>
+  <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/angular.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/angular-route.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/route.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/oacontroller.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/getservice.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/directive.js" %}"></script>
 </body>
-
-
-<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
-<script type="text/javascript" src="{% static "js/angular.js" %}"></script>
-<script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
-<script type="text/javascript" src="{% static "js/oacontroller.js" %}"></script>
-<script type="text/javascript" src="{% static "js/getservice.js" %}"></script>
 </html>

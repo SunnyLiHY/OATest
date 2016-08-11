@@ -12,7 +12,7 @@ stu_list = []
 #all list
 def OaData():
 	del stu_list[:]
-	stu_all_list = stu_info.objects.all()
+	stu_all_list = stu_info.objects.order_by("id")
 	for var in stu_all_list:
 		stu_list.append(model_to_dict(var))
 
@@ -40,3 +40,19 @@ def DeleteData(request):
 		stu_info.objects.get(id=val).delete()
 	OaData()
 	return HttpResponse(json.dumps(stu_list))
+
+def SearchData(request):
+	serData = []
+	name = request.GET.get('student_name')	
+	num = request.GET.get('student_num')
+	if num.strip()=='' and  name.strip()=='':
+		serlist = stu_info.objects.all()
+	elif num.strip()=='':
+		serlist=stu_info.objects.filter(student_name__icontains=name)
+	elif name.strip()=='':
+		serlist=stu_info.objects.filter(student_num__icontains=num)
+	else:
+		serlist=stu_info.objects.filter(student_num__icontains=num).filter(student_name__icontains=name)
+	for var in serlist:
+		serData.append(model_to_dict(var))
+	return HttpResponse(json.dumps(serData))

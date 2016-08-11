@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^AllData$',views.AllData),
     url(r'^AddData$',views.AddData),
     url(r'^DeleteData$',views.DeleteData),
+    url(r'^SearchData$',views.SearchData),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # from django.contrib import admin

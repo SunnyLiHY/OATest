@@ -17,6 +17,7 @@
   <button type="button" class="btn btn-info" ng-click="searchStu()">查询</button>
 </div>
 
+<!--列表数据块-->
 <table class="table" >
   <thead>
     <tr>
@@ -29,7 +30,7 @@
     </tr>
   </thead>
   <tbody id="tbody">
-    <tr ng-repeat = "item in stu_list | orderBy:order">
+    <tr ng-repeat = "item in stu_list">
       <td><div class=""><input type="checkbox" id="is_id" value="{{item.id}}" ng-click="isChecked(item,is_check)" ng-model="is_check"><label for="is_id"></label></div></td>
       <td ng-bind="item.id"></td>
       <td ng-bind="item.student_num"></td>
@@ -40,3 +41,5 @@
   </tbody>
 </table>
 
+<!--分页块-->
+<anypage common-config="common" tag="tagname"></anypage>
