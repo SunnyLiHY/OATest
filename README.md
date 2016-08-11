@@ -4,45 +4,45 @@ The practise demo of python,django,angularjs(postgreSQL)
 Django-1.9.8
 python 2.7
 
-(Ê¹ÓÃpipÏÂÔØ°²×°Python¹«¹²×ÊÔ´¿â£ºpip install psycopg2£¬PythonÓïÑÔµÄPostgreSQLÊı¾İ¿â½Ó¿Ú¡£)
-(×¢ÒâÉèÖÃsetting.pyÊı¾İ¿âÏà¹Ø²ÎÊı)
+(ä½¿ç”¨pipä¸‹è½½å®‰è£…Pythonå…¬å…±èµ„æºåº“ï¼špip install psycopg2ï¼ŒPythonè¯­è¨€çš„PostgreSQLæ•°æ®åº“æ¥å£ã€‚)
+(æ³¨æ„è®¾ç½®setting.pyæ•°æ®åº“ç›¸å…³å‚æ•°)
 
-/**Ôö¼Ó·ÖÒ³Ö¸Áî×é¼ş**/
-//³õÊ¼»¯×é¼ş²ÎÊı
+/**å¢åŠ åˆ†é¡µæŒ‡ä»¤ç»„ä»¶**/
+//åˆå§‹åŒ–ç»„ä»¶å‚æ•°
 $scope.common = {
-				totalNum:14,     //Êı¾İ¿âÏûÏ¢×ÜÊı
-				currentPage:1,	//µ±Ç°Ò³Âë
-				pagesLength: 5,	//Ò³Âë³¤¶È
-				perNum:2,    //Ã¿Ò³Ä¬ÈÏÏÔÊ¾ÏûÏ¢Êı
-				perPageNum:[2,3,4]	//ÇĞ»»Ã¿Ò³ÏÔÊ¾ÏûÏ¢ÊıÊı¾İ
+				totalNum:14,     //æ•°æ®åº“æ¶ˆæ¯æ€»æ•°
+				currentPage:1,	//å½“å‰é¡µç 
+				pagesLength: 5,	//é¡µç é•¿åº¦
+				perNum:2,    //æ¯é¡µé»˜è®¤æ˜¾ç¤ºæ¶ˆæ¯æ•°
+				perPageNum:[2,3,4]	//åˆ‡æ¢æ¯é¡µæ˜¾ç¤ºæ¶ˆæ¯æ•°æ•°æ®
 			};
 
-//Òì²½²éÑ¯Êı¾İ¿â£¬Ö¸Áî×÷ÓÃÓòÓë¸¸×÷ÓÃÓòË«ÏòÊı¾İ°ó¶¨£¬¸ù¾İÊı¾İ¿âÊı¾İ¼´Ê±¸üĞÂÉÏÊö¸÷²ÎÊı
-var promise = oaFactory.getFacStu();   //²éÑ¯Êı¾İ¿â£¨ÔÚgetservice.js·şÎñÖĞÊµÏÖ£©
-			promise.then(
-				function(data) {
-					totalNum = data.length;
-					$scope.data_list = data;
-					$scope.common = {
-						totalNum:totalNum,
-						currentPage:$scope.common.currentPage,
-						pagesLength: $scope.common.pagesLength,
-						perNum:$scope.common.perNum,
-						perPageNum:$scope.common.perPageNum,
-						onChange: function(){
-							//¸ù¾İ²ÎÊı½ØÈ¡ÒªÏÔÊ¾ÔÚÇ°¶ËµÄÊı¾İÁĞ±í$scope.stu_list 
-							var start = ($scope.common.currentPage-1)*$scope.common.perNum;
-							var end =  ($scope.common.currentPage-1)*$scope.common.perNum+$scope.common.perNum;
-							$scope.stu_list = data.slice(start, end);
-           		 		}
-					};
-					// $scope.stu_list = data.slice(0, $scope.common.perNum);
-				},
-				function(data) {
-					$scope.stu_list = {
-						error: 'kong'
-					};
-				}
-			);
+//å¼‚æ­¥æŸ¥è¯¢æ•°æ®åº“ï¼ŒæŒ‡ä»¤ä½œç”¨åŸŸä¸çˆ¶ä½œç”¨åŸŸåŒå‘æ•°æ®ç»‘å®šï¼Œæ ¹æ®æ•°æ®åº“æ•°æ®å³æ—¶æ›´æ–°ä¸Šè¿°å„å‚æ•°
+var promise = oaFactory.getFacStu();   //æŸ¥è¯¢æ•°æ®åº“ï¼ˆåœ¨getservice.jsæœåŠ¡ä¸­å®ç°ï¼‰
+promise.then(
+	function(data) {
+		totalNum = data.length;
+		$scope.data_list = data;
+		$scope.common = {
+			totalNum:totalNum,
+			currentPage:$scope.common.currentPage,
+			pagesLength: $scope.common.pagesLength,
+			perNum:$scope.common.perNum,
+			perPageNum:$scope.common.perPageNum,
+			onChange: function(){
+				//æ ¹æ®å‚æ•°æˆªå–è¦æ˜¾ç¤ºåœ¨å‰ç«¯çš„æ•°æ®åˆ—è¡¨$scope.stu_list 
+				var start = ($scope.common.currentPage-1)*$scope.common.perNum;
+				var end =  ($scope.common.currentPage-1)*$scope.common.perNum+$scope.common.perNum;
+				$scope.stu_list = data.slice(start, end);
+   	 		}
+		};
+		// $scope.stu_list = data.slice(0, $scope.common.perNum);
+	},
+	function(data) {
+		$scope.stu_list = {
+			error: 'kong'
+		};
+	}
+);
 
-ÔÚ·ÖÒ³Ö¸ÁîÖĞ»á¼àÌı(Ê¹ÓÃ$watch)Ïà¹Ø²ÎÊıµÄ±äÁ¿£¬Ò»µ©±ä»¯Ôò¸üĞÂÒ³Âë±í
+åœ¨åˆ†é¡µæŒ‡ä»¤ä¸­ä¼šç›‘å¬(ä½¿ç”¨$watch)ç›¸å…³å‚æ•°çš„å˜é‡ï¼Œä¸€æ—¦å˜åŒ–åˆ™æ›´æ–°é¡µç è¡¨
