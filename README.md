@@ -10,12 +10,12 @@ python 2.7
 /**增加分页指令组件**/
 //初始化组件参数
 $scope.common = {
-				totalNum:14,     //数据库消息总数
-				currentPage:1,	//当前页码
-				pagesLength: 5,	//页码长度
-				perNum:2,    //每页默认显示消息数
-				perPageNum:[2,3,4]	//切换每页显示消息数数据
-			};
+	totalNum:14,     //数据库消息总数
+	currentPage:1,	//当前页码
+	pagesLength: 5,	//页码长度
+	perNum:2,    //每页默认显示消息数
+	perPageNum:[2,3,4]	//切换每页显示消息数数据
+};
 
 //异步查询数据库，指令作用域与父作用域双向数据绑定，根据数据库数据即时更新上述各参数
 var promise = oaFactory.getFacStu();   //查询数据库（在getservice.js服务中实现）
