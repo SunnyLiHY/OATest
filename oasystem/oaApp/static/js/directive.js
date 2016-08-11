@@ -39,7 +39,7 @@ testapp.directive('anypage', function() {
 			//currentPage页码放置在中间
 			//判断页码长度的奇偶性
 			/******************************** 变量说明
-			**** pagesLength:页码长度
+			**** pageSumNum:页码长度
 			**** pageList:页码列表
 			**** totalPage:总页码数
 			**** currentPage:当前页
@@ -59,9 +59,9 @@ testapp.directive('anypage', function() {
 			**** changeToCurrentPage():跳转到某页.使用ng-keyup
 			***********keycode = window.event ? e.keyCode :e.which;keycode为13，即表示回车事件
 			********************************/
-            scope.commonConfig.pagesLength = parseInt(scope.commonConfig.pagesLength) ? parseInt(scope.commonConfig.pagesLength) : 5 ;
-            if(scope.commonConfig.pagesLength % 2 === 0){
-                scope.commonConfig.pagesLength = scope.commonConfig.pagesLength -1;
+            scope.commonConfig.pageSumNum = parseInt(scope.commonConfig.pageSumNum) ? parseInt(scope.commonConfig.pageSumNum) : 5 ;
+            if(scope.commonConfig.pageSumNum % 2 === 0){
+                scope.commonConfig.pageSumNum = scope.commonConfig.pageSumNum -1;
             }
 
 			function getPageList(newValue, oldValue){
@@ -72,25 +72,25 @@ testapp.directive('anypage', function() {
 					scope.commonConfig.currentPage = scope.commonConfig.totalPage;
 				}
 
-				if(scope.commonConfig.pagesLength>=scope.commonConfig.totalPage){
+				if(scope.commonConfig.pageSumNum>=scope.commonConfig.totalPage){
 					for(i =1; i <= scope.commonConfig.totalPage; i++){
 						scope.pageList.push(i);
 					}
 				}else{
 					//currentPage页码放置在中间 (每次pageList只显示五条页码)
 					//当前页小于页码长度中间值
-					if(scope.commonConfig.currentPage<=(scope.commonConfig.pagesLength+1)/2){
-						for(i =1; i <= scope.commonConfig.pagesLength; i++){
+					if(scope.commonConfig.currentPage<=(scope.commonConfig.pageSumNum+1)/2){
+						for(i =1; i <= scope.commonConfig.pageSumNum; i++){
 							scope.pageList.push(i);
 						}
 					//当前页大于（总页码数-页码长度中间值）
-					}else if(scope.commonConfig.currentPage>=(scope.commonConfig.totalPage-((scope.commonConfig.pagesLength-1)/2))){
-						for(i =scope.commonConfig.totalPage-scope.commonConfig.pagesLength+1; i <= scope.commonConfig.totalPage; i++){
+					}else if(scope.commonConfig.currentPage>=(scope.commonConfig.totalPage-((scope.commonConfig.pageSumNum-1)/2))){
+						for(i =scope.commonConfig.totalPage-scope.commonConfig.pageSumNum+1; i <= scope.commonConfig.totalPage; i++){
 							scope.pageList.push(i);
 						}
 					//当前页介于两者之间
 					}else{
-						for(i=scope.commonConfig.currentPage-(scope.commonConfig.pagesLength-1)/2;i<=scope.commonConfig.currentPage+(scope.commonConfig.pagesLength-1)/2;i++){
+						for(i=scope.commonConfig.currentPage-(scope.commonConfig.pageSumNum-1)/2;i<=scope.commonConfig.currentPage+(scope.commonConfig.pageSumNum-1)/2;i++){
 							scope.pageList.push(i);
 						}
 					}

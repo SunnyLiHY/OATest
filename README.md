@@ -12,7 +12,7 @@ python 2.7<br/>
 $scope.common = {<br/>
 	totalNum:14,     //数据库消息总数<br/>
 	currentPage:1,	//当前页码<br/>
-	pagesLength: 5,	//页码长度<br/>
+	pageSumNum: 5,	//页码长度<br/>
 	perNum:2,    //每页默认显示消息数<br/>
 	perPageNum:[2,3,4]	//切换每页显示消息数数据<br/>
 };<br/>
@@ -26,7 +26,7 @@ promise.then(<br/>
 		$scope.common = {<br/>
 			totalNum:totalNum,<br/>
 			currentPage:$scope.common.currentPage,<br/>
-			pagesLength: $scope.common.pagesLength,<br/>
+			pageSumNum: $scope.common.pageSumNum,<br/>
 			perNum:$scope.common.perNum,<br/>
 			perPageNum:$scope.common.perPageNum,<br/>
 			onChange: function(){<br/>

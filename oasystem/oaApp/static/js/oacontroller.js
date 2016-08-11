@@ -13,7 +13,7 @@ testapp
 			$scope.common = {
 				totalNum:14,
 				currentPage:1,
-				pagesLength: 5,
+				pageSumNum: 5,
 				perNum:2,
 				perPageNum:[2,3,4]
 			};
@@ -28,7 +28,7 @@ testapp
 					$scope.common = {
 						totalNum:totalNum,
 						currentPage:$scope.common.currentPage,
-						pagesLength: $scope.common.pagesLength,
+						pageSumNum: $scope.common.pageSumNum,
 						perNum:$scope.common.perNum,
 						perPageNum:$scope.common.perPageNum,
 						onChange: function(){
